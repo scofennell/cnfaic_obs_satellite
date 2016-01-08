@@ -11,7 +11,7 @@
 function cnfaic_obs_satellite_js() {
 	new CNFAIC_Obs_Satellite_JS;
 }
-add_action( 'init', 'cnfaic_obs_satellite_js' );
+add_action( 'init', 'cnfaic_obs_satellite_js', 1 );
 
 class CNFAIC_Obs_Satellite_JS {
 
