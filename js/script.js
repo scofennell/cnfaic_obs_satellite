@@ -12,13 +12,7 @@
  * @type {Object}
  */
 var cnfaicObsSat = {
-
-	loader: cnfaic_obs_satellite.loader,
-	
-	urlBase: cnfaic_obs_satellite.url_base,
-	urlSlug: cnfaic_obs_satellite.url_slug,
-	urlSuffix: cnfaic_obs_satellite.url_suffix,	
-
+	loader: cnfaic_obs_satellite.loader
 };
 
 jQuery( window ).load( function() {
@@ -43,19 +37,11 @@ jQuery( window ).load( function() {
 			// var container = $( that ).parent();
 			// var containerHeight = $( container ).height();
 
-			var containerHeight = 1000;
+			//console.log( $( frame[0].contentWindow ) );
 
-			var url = cnfaicObsSat.urlBase + cnfaicObsSat.urlSlug + cnfaicObsSat.urlSuffix;
-
-			$( frame ).attr( 'src', url );
+			var containerHeight = '1000px';
 
 			$( frame ).css( 'minHeight', containerHeight );
-
-			$( frame ).load( function() {
-
-				console.log( 'iframe loaded' );
-
-			});
 
 		});
 

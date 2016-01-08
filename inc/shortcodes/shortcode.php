@@ -10,19 +10,25 @@
 
 abstract class CNFAIC_Obs_Satellite_Shortcode {
 
-	public function __construct( $slug ) {
+	public static $localized = FALSE;
 
-		$this -> slug = $slug;	
+	public function __construct( $slug, $atts = array() ) {
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 990 );
+		$this -> slug = $slug;
 
-		//add_action( 'wp_enqueue_scripts', array( $this, 'localize' ), 991 );
+		$this -> atts = $atts;	
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'localize' ) );
+		$this -> set_localization_data();
+
+		add_shortcode( 'obs_satellite_' . $slug, array( $this, 'obs_satellite_' . $slug ) );
+
+		$this -> set_iframe_url();	
 
 		$this -> set_loader_div();
 
-		add_shortcode( 'obs_satellite_' . $slug, array( $this, 'obs_satellite_' . $slug ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 990 );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'localize' ) );
 
 	}
 
@@ -34,22 +40,31 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-	function get_loader_div() {
-
-		return $this -> loader_div;
-
-	}
-
 	function set_loader_div() {
+
+		$url = $this -> iframe_url;
+
+		$atts = $this -> atts;
+
+		$atts_san = array();
+		foreach( $atts as $att ) {
+
+			$k = sanitize_key( $att );
+			$v = esc_attr( CNFAIC_Obs_Satellite_Settings::get( $k ) );
+
+			$url = add_query_arg( array( $k => $v ), $url );
+
+		}
 
 		$id = __CLASS__ . '-' . $this -> slug;
 
 		$class = CNFAIC_OBSS_NAMESPACE . '-loader';
 
+		//wp_die( var_dump( $this -> atts ) );
+
 		$out = "
 			<div id='$id' class='$class'>
-				<iframe id='$class-frame' src=''>
-				</iframe>
+				<iframe id='$class-frame' src='$url'></iframe>
 			</div>
 		";
 
@@ -57,29 +72,52 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-	function get_localization_data() {
+	function get_loader_div() {
+		return $this -> loader_div;
+	}
 
-		return $this -> localization_data;
+	function set_iframe_url() {
 
+		$base   = 'dev.cnfaic.org/site/';
+		$slug   = $this -> slug;
+		$suffix = '-embedded';
+
+		$url = esc_url( $base . $slug . $suffix );
+
+		$this -> iframe_url = $url;
+
+	}
+
+	function get_iframe_url() {
+		return $this -> iframe_url;
 	}
 
 	function set_localization_data() {
 
 		$data = array(
 			'loader'       => '.' . CNFAIC_OBSS_NAMESPACE . '-loader',
-			'url_base'     => 'http://dev.cnfaic.org/site/',
-			'url_suffix'   => '-embedded',
 		);
 
 		$this -> localization_data = $data;
 
 	}
 
+
+	function get_localization_data() {
+
+		return $this -> localization_data;
+
+	}
+
 	function localize() {
+
+		if( self::$localized ) { return FALSE; }
 
 		$data = $this -> localization_data;
 
 		wp_localize_script( 'jquery', CNFAIC_OBSS_NAMESPACE, $data );
+
+		self::$localized = TRUE;
 
 	}
 

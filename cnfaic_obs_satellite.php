@@ -40,6 +40,9 @@ define( 'CNFAIC_OBSS_INC_URL', CNFAIC_OBSS_URL . 'inc/' );
  * Include the files that are used on both the front and back end.
  */
 
+// Register our Settings.
+require_once( CNFAIC_OBSS_INC_PATH . 'settings.php' );
+
 // Register our JS.
 require_once( CNFAIC_OBSS_INC_PATH . 'js.php' );
 
@@ -50,6 +53,6 @@ require_once( CNFAIC_OBSS_INC_PATH . 'css.php' );
 require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/shortcode.php' );
 require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/obs_form.php' );
 require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/obs_table.php' );
-require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/obs_map.php' );
+// require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/obs_map.php' );
 
 ?>

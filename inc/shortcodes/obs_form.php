@@ -12,16 +12,20 @@
 function cnfaic_obs_satellite_form() {
 	new CNFAIC_Obs_Satellite_Form;
 }
-add_action( 'template_redirect', 'cnfaic_obs_satellite_form', 999 );
+add_action( 'init', 'cnfaic_obs_satellite_form', 998 );
 
 final class CNFAIC_Obs_Satellite_Form extends CNFAIC_Obs_Satellite_Shortcode {
 
 	public function __construct() {
 
-		parent::__construct( 'form' );
+		$slug = 'form';
 
-		parent::set_localization_data();
-		$this -> set_localization_data();
+		parent::__construct( $slug );
+
+		//add_shortcode( 'obs_satellite_' . $slug, array( $this, 'obs_satellite_' . $slug ) );
+
+		//parent::set_localization_data();
+		//$this -> set_localization_data();
 
 	}
 
@@ -35,7 +39,7 @@ final class CNFAIC_Obs_Satellite_Form extends CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-	function set_localization_data() {
+	/*function set_localization_data() {
 
 		$data = $this -> get_localization_data();
 
@@ -43,6 +47,6 @@ final class CNFAIC_Obs_Satellite_Form extends CNFAIC_Obs_Satellite_Shortcode {
 
 		$this -> localization_data = $data;
 
-	}
+	}*/
 
 }

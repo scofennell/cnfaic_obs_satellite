@@ -7,7 +7,7 @@
  * @subpackage cnfaic-obs-satellite
  * @since CNFAIC Obs Satellite 0.1
  */
-
+/*
 function cnfaic_obs_satellite_map() {
 	new CNFAIC_Obs_Satellite_Map;
 }
@@ -29,4 +29,4 @@ class CNFAIC_Obs_Satellite_Map {
 
 	}
 
-}
+}*/
