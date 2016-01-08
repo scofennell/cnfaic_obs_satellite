@@ -6,9 +6,6 @@
  * @since CNFAIC Obs Satellite 0.1
  */
 
-console.log( 9 );
-console.log( cnfaic_obs_satellite );
-
 /**
  * Some global vars we can use across our JS.
  * 
@@ -16,8 +13,8 @@ console.log( cnfaic_obs_satellite );
  */
 var cnfaicObsSat = {
 
-	loader: cnfaic_obs_satellite.loader,	
-
+	loader: cnfaic_obs_satellite.loader,
+	
 	urlBase: cnfaic_obs_satellite.url_base,
 	urlSlug: cnfaic_obs_satellite.url_slug,
 	urlSuffix: cnfaic_obs_satellite.url_suffix,	
@@ -41,16 +38,27 @@ jQuery( window ).load( function() {
 			
 			var that = this;
 
+			var frame = $( that ).find( 'iframe' );
+
+			// var container = $( that ).parent();
+			// var containerHeight = $( container ).height();
+
+			var containerHeight = 1000;
+
 			var url = cnfaicObsSat.urlBase + cnfaicObsSat.urlSlug + cnfaicObsSat.urlSuffix;
 
-			console.log( url );
+			$( frame ).attr( 'src', url );
 
-			var content = $( that ).attr( 'src', url );
+			$( frame ).css( 'minHeight', containerHeight );
+
+			$( frame ).load( function() {
+
+				console.log( 'iframe loaded' );
+
+			});
 
 		});
 
 	}
 
 }( jQuery ) );
-
-console.log( cnfaicObsSat );

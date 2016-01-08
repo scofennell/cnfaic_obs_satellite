@@ -30,6 +30,8 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		wp_enqueue_script( CNFAIC_OBSS_NAMESPACE );
 
+		wp_enqueue_style( CNFAIC_OBSS_NAMESPACE );	
+
 	}
 
 	function get_loader_div() {
@@ -46,7 +48,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		$out = "
 			<div id='$id' class='$class'>
-				<iframe id='$class-frame' src='' width='100%' height='300'>
+				<iframe id='$class-frame' src=''>
 				</iframe>
 			</div>
 		";
@@ -64,9 +66,9 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 	function set_localization_data() {
 
 		$data = array(
-			'loader'     => '.' . CNFAIC_OBSS_NAMESPACE . '-loader iframe',
-			'url_base'   => 'http://dev.cnfaic.org/site/',
-			'url_suffix' => '-embedded',
+			'loader'       => '.' . CNFAIC_OBSS_NAMESPACE . '-loader',
+			'url_base'     => 'http://dev.cnfaic.org/site/',
+			'url_suffix'   => '-embedded',
 		);
 
 		$this -> localization_data = $data;

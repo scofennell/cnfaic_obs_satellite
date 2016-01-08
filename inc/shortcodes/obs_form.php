@@ -23,19 +23,11 @@ final class CNFAIC_Obs_Satellite_Form extends CNFAIC_Obs_Satellite_Shortcode {
 		parent::set_localization_data();
 		$this -> set_localization_data();
 
-		//wp_die( var_dump( $this -> localization_data ) );
-
-		//parent::localize();
-
 	}
 
 	function obs_satellite_form( $atts ) {
 
 		$a = shortcode_atts( array(), $atts );
-
-		$id = __CLASS__ . '-' . __FUNCTION__;
-
-		$class = CNFAIC_OBSS_NAMESPACE . '-loader';
 
 		$out = $this -> get_loader_div();
 

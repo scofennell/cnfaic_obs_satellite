@@ -43,6 +43,9 @@ define( 'CNFAIC_OBSS_INC_URL', CNFAIC_OBSS_URL . 'inc/' );
 // Register our JS.
 require_once( CNFAIC_OBSS_INC_PATH . 'js.php' );
 
+// Register our CSS.
+require_once( CNFAIC_OBSS_INC_PATH . 'css.php' );
+
 // Register shortcodes.
 require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/shortcode.php' );
 require_once( CNFAIC_OBSS_INC_PATH . 'shortcodes/obs_form.php' );
