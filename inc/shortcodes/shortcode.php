@@ -12,19 +12,15 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	public static $localized = FALSE;
 
-	public function __construct( $slug, $atts = array() ) {
+	public function __construct( $slug ) {
 
 		$this -> slug = $slug;
-
-		$this -> atts = $atts;	
 
 		$this -> set_localization_data();
 
 		add_shortcode( 'obs_satellite_' . $slug, array( $this, 'obs_satellite_' . $slug ) );
 
 		$this -> set_iframe_url();	
-
-		$this -> set_loader_div();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 990 );
 
@@ -40,17 +36,15 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-	function set_loader_div() {
+	function set_loader_div( $atts ) {
 
 		$url = $this -> iframe_url;
 
-		$atts = $this -> atts;
-
 		$atts_san = array();
-		foreach( $atts as $att ) {
+		foreach( $atts as $k => $v ) {
 
-			$k = sanitize_key( $att );
-			$v = esc_attr( CNFAIC_Obs_Satellite_Settings::get( $k ) );
+			$k = sanitize_key( $k );
+			$v = esc_attr( $v );
 
 			$url = add_query_arg( array( $k => $v ), $url );
 

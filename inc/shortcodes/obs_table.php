@@ -11,7 +11,7 @@
 function cnfaic_obs_satellite_table() {
 	new CNFAIC_Obs_Satellite_Table;
 }
-add_action( 'init', 'cnfaic_obs_satellite_table', 997 );
+add_action( 'template_redirect', 'cnfaic_obs_satellite_table', 997 );
 
 final class CNFAIC_Obs_Satellite_Table extends CNFAIC_Obs_Satellite_Shortcode {
 
@@ -19,13 +19,27 @@ final class CNFAIC_Obs_Satellite_Table extends CNFAIC_Obs_Satellite_Shortcode {
 
 		$slug = 'table';
 
-		$atts = array( 'regions' );
-
-		parent::__construct( $slug, $atts );
+		parent::__construct( $slug );
 
 	}
 
-	function obs_satellite_table() {
+	function obs_satellite_table( $atts ) {
+
+		$a = shortcode_atts( array(
+
+			'regions' => '',
+
+		), $atts );
+
+		$regions_arr = explode( ',', $a['regions'] );
+		$regions_arr = array_map( 'absint', $regions_arr );
+		$regions = implode( ',', $regions_arr );
+
+		$atts_san = array(
+			'regions' => $regions,
+		);
+		
+		$this -> set_loader_div( $atts_san );
 
 		$out = $this -> get_loader_div();
 

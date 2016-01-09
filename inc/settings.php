@@ -17,7 +17,7 @@ class CNFAIC_Obs_Satellite_Settings {
 
 	public function __construct() {
 	
-		wp_die( 20 );
+		//wp_die( 20 );
 
 	}
 }
