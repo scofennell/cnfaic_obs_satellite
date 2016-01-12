@@ -44,7 +44,6 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-
 	function enqueue() {
 
 		wp_enqueue_script( CNFAIC_OBSS_NAMESPACE );
@@ -77,7 +76,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		$url = $this -> iframe_url;
 
-		$atts_san = array();
+		/*$atts_san = array();
 		foreach( $atts as $k => $v ) {
 
 			$k = sanitize_key( $k );
@@ -85,7 +84,9 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 			$url = add_query_arg( array( $k => $v ), $url );
 
-		}
+		}*/
+
+		$url = add_query_arg( array( 'satellite' => $this -> satellite_slug ), $url );
 
 		$id = __CLASS__ . '-' . $this -> resource_slug;
 
