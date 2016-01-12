@@ -12,13 +12,18 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	public static $localized = FALSE;
 
-	public function __construct( $slug ) {
+	public function __construct( $resource_slug ) {
 
-		$this -> slug = $slug;
+		$this -> resource_slug = $resource_slug;
+
+
+		$this -> satellite_slug = $this -> set_satellite_slug();
+
+
 
 		$this -> set_localization_data();
 
-		add_shortcode( 'obs_satellite_' . $slug, array( $this, 'obs_satellite_' . $slug ) );
+		add_shortcode( 'obs_satellite_' . $resource_slug, array( $this, 'obs_satellite_' . $resource_slug ) );
 
 		$this -> set_iframe_url();	
 
@@ -28,11 +33,43 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
+	function set_satellite_slug() {
+
+		$domain = $_SERVER['HTTP_HOST'];
+		$domain_arr = explode( '.', $domain );
+		array_pop( $domain_arr );
+		$domain = implode( '.', $domain_arr );
+
+		return $domain;
+
+	}
+
+
 	function enqueue() {
 
 		wp_enqueue_script( CNFAIC_OBSS_NAMESPACE );
 
 		wp_enqueue_style( CNFAIC_OBSS_NAMESPACE );	
+
+	}
+
+	function parse_atts( $atts ) {
+		
+		$a = shortcode_atts( array(
+
+			'regions' => '',
+
+		), $atts );
+
+		$regions_arr = explode( ',', $a['regions'] );
+		$regions_arr = array_map( 'absint', $regions_arr );
+		$regions = implode( ',', $regions_arr );
+
+		$atts_san = array(
+			'regions' => $regions,
+		);
+
+		return $atts_san;
 
 	}
 
@@ -50,7 +87,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		}
 
-		$id = __CLASS__ . '-' . $this -> slug;
+		$id = __CLASS__ . '-' . $this -> resource_slug;
 
 		$class = CNFAIC_OBSS_NAMESPACE . '-loader';
 
@@ -72,11 +109,11 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 	function set_iframe_url() {
 
-		$base   = 'dev.cnfaic.org/site/';
-		$slug   = $this -> slug;
-		$suffix = '-embedded';
+		$base   = 'dev.cnfaic.org/site';
+		$satellite_slug   = $this -> satellite_slug;
+		$resource_slug   = $this -> resource_slug;
 
-		$url = esc_url( $base . $slug . $suffix );
+		$url = esc_url( $base . '/' . $satellite_slug . '/' . $resource_slug );
 
 		$this -> iframe_url = $url;
 

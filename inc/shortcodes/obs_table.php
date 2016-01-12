@@ -17,29 +17,19 @@ final class CNFAIC_Obs_Satellite_Table extends CNFAIC_Obs_Satellite_Shortcode {
 
 	public function __construct() {
 
-		$slug = 'table';
+		$resource_slug = 'table';
 
-		parent::__construct( $slug );
+		parent::__construct( $resource_slug );
 
 	}
 
 	function obs_satellite_table( $atts ) {
 
-		$a = shortcode_atts( array(
+		$atts = $this -> parse_atts( $atts );
 
-			'regions' => '',
+		$regions = $atts['regions'];
 
-		), $atts );
-
-		$regions_arr = explode( ',', $a['regions'] );
-		$regions_arr = array_map( 'absint', $regions_arr );
-		$regions = implode( ',', $regions_arr );
-
-		$atts_san = array(
-			'regions' => $regions,
-		);
-		
-		$this -> set_loader_div( $atts_san );
+		$this -> set_loader_div( $atts );
 
 		$out = $this -> get_loader_div();
 

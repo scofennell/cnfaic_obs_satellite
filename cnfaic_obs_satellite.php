@@ -40,8 +40,11 @@ define( 'CNFAIC_OBSS_INC_URL', CNFAIC_OBSS_URL . 'inc/' );
  * Include the files that are used on both the front and back end.
  */
 
-// Register our Settings.
+// Register our settings.
 require_once( CNFAIC_OBSS_INC_PATH . 'settings.php' );
+
+// Register our body classes.
+require_once( CNFAIC_OBSS_INC_PATH . 'body_classes.php' );
 
 // Register our JS.
 require_once( CNFAIC_OBSS_INC_PATH . 'js.php' );
