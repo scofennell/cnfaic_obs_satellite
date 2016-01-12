@@ -29,20 +29,6 @@ final class CNFAIC_Obs_Satellite_Form extends CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-	function obs_satellite_form( $atts ) {
-
-		$atts = $this -> parse_atts( $atts );
-
-		$regions = $atts['regions'];
-
-		$this -> set_loader_div( $atts );
-
-		$out = $this -> get_loader_div();
-
-		return $out;
-
-	}
-
 	/*function set_localization_data() {
 
 		$data = $this -> get_localization_data();

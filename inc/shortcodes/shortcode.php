@@ -19,17 +19,27 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		$this -> satellite_slug = $this -> set_satellite_slug();
 
-
-
 		$this -> set_localization_data();
 
-		add_shortcode( 'obs_satellite_' . $resource_slug, array( $this, 'obs_satellite_' . $resource_slug ) );
+		add_shortcode( 'obs_satellite_' . $resource_slug, array( $this, 'shortcode' ) );
 
 		$this -> set_iframe_url();	
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 990 );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'localize' ) );
+
+	}
+
+	function shortcode( $atts ) {
+
+		$atts = $this -> parse_atts( $atts );
+
+		$this -> set_loader_div( $atts );
+
+		$out = $this -> get_loader_div();
+
+		return $out;
 
 	}
 

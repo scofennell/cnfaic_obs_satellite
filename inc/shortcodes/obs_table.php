@@ -23,18 +23,6 @@ final class CNFAIC_Obs_Satellite_Table extends CNFAIC_Obs_Satellite_Shortcode {
 
 	}
 
-	function obs_satellite_table( $atts ) {
-
-		$atts = $this -> parse_atts( $atts );
-
-		$this -> set_loader_div( $atts );
-
-		$out = $this -> get_loader_div();
-
-		return $out;
-
-	}
-
 	/*function set_localization_data() {
 
 		$data = $this -> get_localization_data();
