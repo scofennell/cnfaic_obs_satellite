@@ -27,8 +27,6 @@ final class CNFAIC_Obs_Satellite_Table extends CNFAIC_Obs_Satellite_Shortcode {
 
 		$atts = $this -> parse_atts( $atts );
 
-		$regions = $atts['regions'];
-
 		$this -> set_loader_div( $atts );
 
 		$out = $this -> get_loader_div();

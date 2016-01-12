@@ -56,17 +56,21 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 		
 		$a = shortcode_atts( array(
 
-			'regions' => '',
+//			'regions' => '',
+			'naked'   => '',
 
 		), $atts );
 
-		$regions_arr = explode( ',', $a['regions'] );
-		$regions_arr = array_map( 'absint', $regions_arr );
-		$regions = implode( ',', $regions_arr );
+//		$regions_arr = explode( ',', $a['regions'] );
+//		$regions_arr = array_map( 'absint', $regions_arr );
+//		$regions = implode( ',', $regions_arr );
 
-		$atts_san = array(
-			'regions' => $regions,
-		);
+		$atts_san = array();
+
+		$naked = absint( $a['naked'] );
+		if( ! empty( $naked ) ) {
+			$atts_san['naked'] = $naked;
+		}
 
 		return $atts_san;
 
@@ -76,7 +80,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		$url = $this -> iframe_url;
 
-		/*$atts_san = array();
+		$atts_san = array();
 		foreach( $atts as $k => $v ) {
 
 			$k = sanitize_key( $k );
@@ -84,7 +88,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 			$url = add_query_arg( array( $k => $v ), $url );
 
-		}*/
+		}
 
 		//$url = add_query_arg( array( 'satellites' => $this -> satellite_slug ), $url );
 
