@@ -86,7 +86,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		}*/
 
-		$url = add_query_arg( array( 'satellite' => $this -> satellite_slug ), $url );
+		$url = add_query_arg( array( CNFAIC_SAT_POST_TYPE => $this -> satellite_slug ), $url );
 
 		$id = __CLASS__ . '-' . $this -> resource_slug;
 
