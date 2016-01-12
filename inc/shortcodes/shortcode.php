@@ -86,7 +86,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 
 		}*/
 
-		$url = add_query_arg( array( 'satellites' => $this -> satellite_slug ), $url );
+		//$url = add_query_arg( array( 'satellites' => $this -> satellite_slug ), $url );
 
 		$id = __CLASS__ . '-' . $this -> resource_slug;
 
@@ -114,7 +114,7 @@ abstract class CNFAIC_Obs_Satellite_Shortcode {
 		$satellite_slug   = $this -> satellite_slug;
 		$resource_slug   = $this -> resource_slug;
 
-		$url = esc_url( $base . '/' . $satellite_slug . '/' . $resource_slug );
+		$url = esc_url( $base . '/satellites/' . $satellite_slug . '/' . $resource_slug );
 
 		$this -> iframe_url = $url;
 
